@@ -8,12 +8,6 @@
       "quantity": 8
     },
     {
-      "name": "shampoo",
-      "description": "apple nourishing",
-      "price": 600,
-      "id": 7
-    },
-    {
       "name": "Television",
       "description": "A best for home use",
       "price": 20000,
@@ -42,6 +36,24 @@
       "description": "Full HD Frameless",
       "price": 26699,
       "id": 14
+    },
+    {
+      "name": "HP Laptop",
+      "description": "G 840 500USSD",
+      "price": 57000,
+      "id": 15
+    },
+    {
+      "name": "A seat",
+      "description": "Black recliner 7 seater",
+      "price": 65000,
+      "id": 16
+    },
+    {
+      "name": "Toothpaste",
+      "description": "Maxfresh 65g",
+      "price": 120,
+      "id": 17
     }
   ]
 }

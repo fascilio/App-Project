@@ -149,14 +149,14 @@ cart.forEach(item => {
 cartItems.appendChild(row);
 
 // Add event listener to "Remove" button
-const removeBtn = row.querySelector('.remove-item');
-removeBtn.addEventListener('click', () => {
-  const id = parseInt(removeBtn.dataset.id);
-  removeFromCart(id);
-});
+    const removeBtn = row.querySelector('.remove-item');
+    removeBtn.addEventListener('click', () => {
+     const id = parseInt(removeBtn.dataset.id);
+    removeFromCart(id);
+    });
   // Add event listener to quantity input
-  const quantityInput = row.querySelector('.item-quantity');
-quantityInput.addEventListener('change', () => {
+    const quantityInput = row.querySelector('.item-quantity');
+    quantityInput.addEventListener('change', () => {
     const id = parseInt(quantityInput.dataset.id);
     const newQuantity = parseInt(quantityInput.value);
     updateCartQuantity(id, newQuantity);
@@ -226,7 +226,6 @@ clientInfoForm.addEventListener('submit', (event) => {
     const name = document.querySelector('#name1').value;
     const location = document.querySelector('#location').value;
 
- // Use the form data as needed in your code
     console.log('Payment method:', paymentMethod);
     console.log('Phone number:', phoneNumber);
     console.log('name:', name);
