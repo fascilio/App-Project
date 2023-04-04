@@ -157,7 +157,42 @@ buyBtn.addEventListener('click', (event) => {
     location.reload();
   }, 3000);
 });
+// Delete product from server and remove from page
+function deleteProduct(id) {
+fetch(`http://localhost:3000/items/${id}`, { method: 'DELETE' 
+})
+.then(response => response.json())
+.then(() => {
+products = products.filter(product => product.id !== id);
 
+  // Remove product from page
+  const itemToRemove = productList.querySelector(`[data-id="${id}"]`);
+  productList.removeChild(itemToRemove);
+})
+.catch(error => console.error(`Error deleting product: ${error}`));
+}
+// Update cart
+function updateCart() {
+// Clear cart items
+cartItems.innerHTML = '';
+// Update cart items in table
+cart.forEach(item => {
+  const row = document.createElement('tr');
+  row.innerHTML = `
+    <td>${item.name}</td>
+    <td>${item.description}</td>
+    <td>Ksh.${item.price.toFixed(2)}</td>
+    <td><input type="number" min="1" value="${item.quantity}" data-id="${item.id}" class="item-quantity"></td>
+    <td><button class="remove-item" data-id="${item.id}">Remove</button></td>
+  `;
+  cartItems.appendChild(row);
+});
+// Add event listener to "Remove" button
+const removeItemBtn = row.querySelector('.remove-item');
+removeItemBtn.addEventListener('click', () => {
+  const id = parseInt(removeItemBtn.dataset.id);
+  removeFromCart(id);
+});
 </script>
 </body>
 </html>
