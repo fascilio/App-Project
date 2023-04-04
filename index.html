@@ -193,6 +193,15 @@ removeItemBtn.addEventListener('click', () => {
   const id = parseInt(removeItemBtn.dataset.id);
   removeFromCart(id);
 });
+// Add event listener to quantity input
+const quantityInput = row.querySelector('.item-quantity');
+quantityInput.addEventListener('input', () => {
+  const id = parseInt(quantityInput.dataset.id);
+  updateItemQuantity(id, parseInt(quantityInput.value));
+});
+
+};
+
 </script>
 </body>
 </html>
