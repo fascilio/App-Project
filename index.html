@@ -201,6 +201,56 @@ quantityInput.addEventListener('input', () => {
 });
 
 };
+// Update cart total
+const cartTotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+document.querySelector('#cart-total').textContent = `Ksh.${cartTotal.toFixed(2)}`;
+
+// Remove item from cart
+function removeFromCart(id) {
+  cart = cart.filter(item => item.id !== id);
+  updateCart();
+}
+
+// Update cart items in table
+function updateCart() {
+  // Clear table body
+  cartItems.innerHTML = '';
+
+  // Update cart items
+  cart.forEach(item => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${item.name}</td>
+      <td>${item.description}</td>
+      <td>Ksh.${item.price.toFixed(2)}</td>
+      <td><input type="number" min="1" value="${item.quantity}" data-id="${item.id}" class="item-quantity"></td>
+      <td><button class="remove-item" data-id="${item.id}">Remove</button></td>
+    `;
+    cartItems.appendChild(row);
+
+    // Add event listener to "Remove" button
+    const removeBtn = row.querySelector('.remove-item');
+    removeBtn.addEventListener('click', () => {
+      const id = parseInt(removeBtn.dataset.id);
+      removeFromCart(id);
+    });
+      // Add event listener to quantity input
+      const quantityInput = row.querySelector('.item-quantity');
+    quantityInput.addEventListener('change', () => {
+      const id = parseInt(quantityInput.dataset.id);
+      const newQuantity = parseInt(quantityInput.value);
+      updateCartQuantity(id, newQuantity);
+    });
+  });
+
+  // Update cart total
+  const cartTotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+  document.querySelector('#cart-total').textContent = `Ksh.${cartTotal.toFixed(2)}`;
+
+  // Update cart link text
+  const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
+  cartLink.textContent = `Cart (${cartItemCount})`;
+}
 
 </script>
 </body>
