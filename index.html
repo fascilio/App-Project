@@ -122,7 +122,27 @@ function displayProducts() {
 });
   });
 }
+// Add item to cart
+function addToCart(id) {
+const productToAdd = products.find(product => product.id === id);
+const itemInCart = cart.find(item => item.id === id);
 
+if (itemInCart) {
+// If item is already in cart, increase quantity
+itemInCart.quantity++;
+} else {
+// If item is not in cart, add to cart with quantity of 1
+cart.push({
+id: productToAdd.id,
+name: productToAdd.name,
+description: productToAdd.description,
+price: productToAdd.price,
+quantity: 1
+});
+}
+
+updateCart();
+}
 
 </script>
 </body>
