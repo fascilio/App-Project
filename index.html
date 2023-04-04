@@ -143,6 +143,20 @@ quantity: 1
 
 updateCart();
 }
+const buyBtn = document.querySelector('#buy');
+buyBtn.addEventListener('click', (event) => {
+  event.preventDefault();
+  const message = document.createElement('div');
+  message.textContent = "Thank you for shopping with us. You were served by SAMUEL.";
+  document.body.appendChild(message);
+  setTimeout(() => {
+    document.body.removeChild(message);
+  }, 3000);
+  // Reload page
+  setTimeout(() => {
+    location.reload();
+  }, 3000);
+});
 
 </script>
 </body>
