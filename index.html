@@ -251,7 +251,49 @@ function updateCart() {
   const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
   cartLink.textContent = `Cart (${cartItemCount})`;
 }
+// Update item quantity in cart
+function updateItemQuantity(id, quantity) {
+  const itemToUpdate = cart.find(item => item.id === id);
+  itemToUpdate.quantity = quantity;
+  updateCart();
+}
 
+//Submit post product form
+postProductForm.addEventListener('submit', event => {
+  event.preventDefault();
+
+  const name = document.querySelector('#name').value;
+  const description = document.querySelector('#description').value;
+  const price = parseFloat(document.querySelector('#price').value);
+
+  const newProduct = {
+  name: name,
+  description: description,
+  price: price
+  };
+
+fetch('http://localhost:3000/items', {
+  method: 'POST',
+  headers: {
+  'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(newProduct)
+})
+  .then(response => response.json())
+  .then(data => {
+  products.push(data);
+  displayProducts();
+  postProductForm.reset();
+});
+});
+
+
+// Update cart link text
+function updateCartLinkText() {
+  const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
+  const cartLinkText = `Cart (${cartItemCount})`;
+  cartLink.textContent = cartLinkText;
+}
 </script>
 </body>
 </html>
