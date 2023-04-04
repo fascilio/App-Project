@@ -294,6 +294,29 @@ function updateCartLinkText() {
   const cartLinkText = `Cart (${cartItemCount})`;
   cartLink.textContent = cartLinkText;
 }
+// Initialize cart link text
+// updateCartLinkText();
+
+const clientInfoForm = document.querySelector('#client-info-form');
+
+clientInfoForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const paymentMethod = document.querySelector('#payment-method').value;
+  const phoneNumber = document.querySelector('#phone-number').value;
+  const name = document.querySelector('#name1').value;
+  const location = document.querySelector('#location').value;
+  
+  // // Use the form data as needed in your code
+  console.log('Payment method:', paymentMethod);
+  console.log('Phone number:', phoneNumber);
+  console.log('name:', name);
+  console.log('Location:', location);
+});
+
+// Add event listener to "Update cart" button
+updateCartBtn.addEventListener('click', () => {
+updateCart();
+});
 </script>
 </body>
 </html>
