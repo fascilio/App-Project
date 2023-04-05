@@ -1,7 +1,7 @@
 {
   "items": [
     {
-      "id": 4,
+      "id": 1,
       "name": "A table",
       "description": "A nice table",
       "price": 8000,
@@ -11,49 +11,43 @@
       "name": "Television",
       "description": "A best for home use",
       "price": 20000,
-      "id": 9
-    },
-    {
-      "name": "cooking oil",
-      "description": "free flow",
-      "price": 750,
-      "id": 10
+      "quantity": 12,
+      "id": 2
     },
     {
       "name": "Hisense 92L",
       "description": "Single door direct cooling fridge",
       "price": 21300,
-      "id": 12
+      "quantity": 5,
+      "id": 3
     },
     {
       "name": "Fresh Fri",
       "description": "Tripple refined 3L",
       "price": 1027,
-      "id": 13
+      "quantity": 20,
+      "id": 4
     },
     {
       "name": "Skyworth 43\"",
       "description": "Full HD Frameless",
       "price": 26699,
-      "id": 14
+      "quantity": 7,
+      "id": 5
     },
     {
       "name": "HP Laptop",
       "description": "G 840 500USSD",
       "price": 57000,
-      "id": 15
+      "quantity": 3,
+      "id": 6
     },
     {
       "name": "A seat",
       "description": "Black recliner 7 seater",
       "price": 65000,
-      "id": 16
-    },
-    {
-      "name": "Toothpaste",
-      "description": "Maxfresh 65g",
-      "price": 120,
-      "id": 17
+      "quantity": 5,
+      "id": 7
     }
   ]
 }

@@ -70,6 +70,12 @@ h1{
     justify-content: space-between;
 }
 
+#product-list > div {
+    flex-basis: calc(16.666% - 10px);
+    margin-bottom: 20px;
+}
+
+  
 /* position client info and post products to top right */
 #client-info-form{
     display: flex;

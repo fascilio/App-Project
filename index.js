@@ -15,53 +15,84 @@
       displayProducts();
   });
 
+  
+
 // Display products on page
 function displayProducts() {
     products.forEach(product => {
-    const item = document.createElement('li');
-     item.innerHTML = `
-     <h2>${product.name}</h2>
-     <p>${product.description}</p>
-     <p>Price: Ksh.${product.price.toFixed(2)}</p>
-     <button class="add-to-cart" data-id="${product.id}">Add to cart</button>
-     <button class="delete-product" data-id="${product.id}">Delete</button>
-`;
-  productList.appendChild(item);
-
-// Add event listener to "Add to cart" button
+      const item = document.createElement('li');
+      item.innerHTML = `
+        <h2>${product.name}</h2>
+        <p>${product.description}</p>
+        <p>Quantity: <span class="quantity" id="quantity-${product.id}">${product.quantity}</span></p>
+        <p>Price: Ksh.${product.price.toFixed(2)}</p>
+        <button class="add-to-cart" data-id="${product.id}">Add to cart</button>
+        <button class="delete-product" data-id="${product.id}">Delete</button>
+      `;
+      productList.appendChild(item);
+  
+      
+    // Add event listener to "Add to cart" button
     const addToCartBtn = item.querySelector('.add-to-cart');
     addToCartBtn.addEventListener('click', () => {
     const id = parseInt(addToCartBtn.dataset.id);
-    addToCart(id);
+    const quantityEl = document.querySelector(`#quantity-${id}`);
+    let quantity = parseInt(quantityEl.textContent);
+        if (quantity === 0) {
+        quantityEl.textContent = "Out of stock";
+        quantityEl.style.color = "red";
+        addToCartBtn.disabled = true;
+        return;
+    }
+  quantityEl.textContent = --quantity;
+  const itemInCart = cart.find(item => item.id === id);
+  if (itemInCart) {
+    itemInCart.quantity++;
+  } else {
+    cart.push({
+      id: product.id,
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      quantity: 1
+    });
+  }
+  updateCart();
 });
-// Add event listener to 'Delete' button 
+    // Add event listener to "Delete" button
     const deleteProductBtn = item.querySelector('.delete-product');
     deleteProductBtn.addEventListener('click', () => {
     const id = parseInt(deleteProductBtn.dataset.id);
     deleteProduct(id);
 });
-});
+  });
 }
-// Add item to cart
 function addToCart(id) {
     const productToAdd = products.find(product => product.id === id);
     const itemInCart = cart.find(item => item.id === id);
-
+  
     if (itemInCart) {
-        // If item is already in cart, increase quantity
-    itemInCart.quantity++;
-    } else {
-      // If item is not in cart, add to cart with quantity of 1
-    cart.push({
-    id: productToAdd.id,
-    name: productToAdd.name,
-    description: productToAdd.description,
-    price: productToAdd.price,
-    quantity: 1
-    });
-}
-    updateCart();
-}
+      // If item is already in cart, increase quantity
+      if (itemInCart.quantity === productToAdd.quantity) {
+        alert('Out of stock');
+        const quantityP = document.querySelector('#quantity-' + id);
+        quantityP.textContent = productToAdd.quantity;
+        return;
+        }
+        itemInCart.quantity++;
+        } else {
+        // Add new item to cart
+        cart.push({
+        id: productToAdd.id,
+        name: productToAdd.name,
+        description: productToAdd.description,
+        price: productToAdd.price,
+        quantity: 1
+        });
+        }
+        updateCart();
+        }
+
 
 const buyBtn = document.querySelector('#buy');
     buyBtn.addEventListener('click', (event) => {
@@ -77,53 +108,45 @@ const buyBtn = document.querySelector('#buy');
     location.reload();
 }, 3000);
 });
-// Delete product from server and remove from page
+
 function deleteProduct(id) {
-    fetch(`http://localhost:3000/items/${id}`, { method: 'DELETE' 
+    // Send a DELETE request to the server to remove the product
+    fetch(`http://localhost:3000/items/${id}`, {
+      method: 'DELETE'
     })
     .then(response => response.json())
     .then(() => {
-    products = products.filter(product => product.id !== id);
-
-// Remove product from page
-    const itemToRemove = productList.querySelector(`[data-id="${id}"]`);
-    productList.removeChild(itemToRemove);
+      // Remove the product from the products array
+      products = products.filter(product => product.id !== id);
+      // Remove the product from the display
+      const productToRemove = document.querySelector(`li[data-id="${id}"]`);
+      productList.removeChild(productToRemove);
     })
     .catch(error => console.error(`Error deleting product: ${error}`));
-}
-// Update cart
+  }
+  
+
+  // Update cart
 function updateCart() {
     // Clear cart items
     cartItems.innerHTML = '';
+    // Initialize total
+    let total = 0;
     // Update cart items in table
     cart.forEach(item => {
-    const row = document.createElement('tr');
-    row.innerHTML = `
-    <td>${item.name}</td>
-    <td>${item.description}</td>
-    <td>Ksh.${item.price.toFixed(2)}</td>
-    <td><input type="number" min="1" value="${item.quantity}" data-id="${item.id}" class="item-quantity"></td>
-    <td><button class="remove-item" data-id="${item.id}">Remove</button></td>
-    `;
-    cartItems.appendChild(row);
-});
-// Add event listener to "Remove" button
-const removeItemBtn = row.querySelector('.remove-item');
-    removeItemBtn.addEventListener('click', () => {
-        const id = parseInt(removeItemBtn.dataset.id);
-    removeFromCart(id);
-});
-// Add event listener to quantity input
-const quantityInput = row.querySelector('.item-quantity');
-    quantityInput.addEventListener('input', () => {
-    const id = parseInt(quantityInput.dataset.id);
-    updateItemQuantity(id, parseInt(quantityInput.value));
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${item.name}</td>
+            <td>${item.description}</td>
+            <td>Ksh.${item.price.toFixed(2)}</td>
+            <td>${item.quantity}</td>
+            <td>Ksh.${(item.price * item.quantity).toFixed(2)}</td>
+            `;
+        cartItems.appendChild(row);
+        total += item.price * item.quantity;
     });
 
-};
-// Update cart total
-const cartTotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
-document.querySelector('#cart-total').textContent = `Ksh.${cartTotal.toFixed(2)}`;
+}
 
 // Remove item from cart
 function removeFromCart(id) {
@@ -184,11 +207,13 @@ postProductForm.addEventListener('submit', event => {
 
     const name = document.querySelector('#name').value;
     const description = document.querySelector('#description').value;
+    const quantity = parseInt(document.querySelector('#quantity').value);
     const price = parseFloat(document.querySelector('#price').value);
 
     const newProduct = {
     name: name,
     description: description,
+    quantity: quantity,
     price: price
 };
 
@@ -228,7 +253,7 @@ clientInfoForm.addEventListener('submit', (event) => {
 
     console.log('Payment method:', paymentMethod);
     console.log('Phone number:', phoneNumber);
-    console.log('name:', name);
+    console.log('Name:', name);
     console.log('Location:', location);
 });
 
@@ -236,3 +261,5 @@ clientInfoForm.addEventListener('submit', (event) => {
 updateCartBtn.addEventListener('click', () => {
 updateCart();
 });
+
+
