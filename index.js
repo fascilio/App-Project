@@ -97,7 +97,8 @@ function addToCart(id) {
         buyBtn.addEventListener('click', (event) => {
         event.preventDefault();
         const message = document.createElement('div');
-        message.textContent = "Thank you for shopping with us. You were served by SAMUEL.";
+        message.textContent = "Purchase Done! Thank you for shopping with us.";
+        message.style.color =  "green";
         document.body.appendChild(message);
         setTimeout(() => {
         document.body.removeChild(message);

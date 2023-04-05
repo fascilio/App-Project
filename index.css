@@ -1,9 +1,6 @@
 body{
     background-color: rgb(255, 217, 0);
-   /* display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;*/
+    
 }
 .logo{
     width: 100px;
@@ -35,6 +32,8 @@ h1{
     align-items: center;
 }
 #buy{
+    cursor: pointer;
+    border-radius: 30px;
     background-color: green;
     box-shadow: 0 0 5px cyan,
     0 0 25px cyan;
@@ -44,17 +43,44 @@ h1{
     0 0 25px Green, 0 0 50px Green,
     0 0 100px Green, 0 0 200px Green;
 }
+#update-cart-btn{
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: transparent;
+    box-shadow: 0 0 5px cyan,
+    0 0 25px cyan;
+}
+#update-cart-btn:hover{
+    box-shadow: 0 0 5px black,
+    0 0 25px black, 0 0 50px black,
+    0 0 100px black, 0 0 200px black;
+}
 .add-to-cart{
+    cursor: pointer;
+    border-radius: 10px;
     background-color: pink;
     box-shadow: 0 0 5px cyan,
     0 0 25px cyan;
 }
 .add-to-cart:hover{
-    box-shadow: 0 0 5px Green,
-    0 0 25px Green, 0 0 50px Green,
-    0 0 100px Green, 0 0 200px Green;
+    box-shadow: 0 0 5px green,
+    0 0 25px green, 0 0 50px green,
+    0 0 100px green, 0 0 200px green;
+}
+.delete-product{
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: grey;
+    box-shadow: 0 0 5px cyan,
+    0 0 25px cyan;
+}
+.delete-product:hover{
+    box-shadow: 0 0 5px red,
+    0 0 25px red, 0 0 50px red,
+    0 0 100px red, 0 0 200px red;
 }
 .remove-item{
+    cursor: pointer;
     background-color: red;
     box-shadow: 0 0 5px cyan,
     0 0 25px cyan;
@@ -65,9 +91,6 @@ h1{
     0 0 100px Green, 0 0 200px Green;
 }
 #product-list{
-   /* display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;*/
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-gap: 20px;
@@ -81,7 +104,6 @@ h1{
     padding: 20px;
 }
 
-/* position client info and post products to top right */
 #client-info-form{
     display: flex;
     padding-left: 10px;
