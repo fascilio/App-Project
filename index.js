@@ -25,6 +25,7 @@ function displayProducts() {
         <h2>${product.name}</h2>
         <p>${product.description}</p>
         <p>Quantity: <span class="quantity" id="quantity-${product.id}">${product.quantity}</span></p>
+        <p><del><span class="previous-price">Ksh.${product.previousPrice.toFixed(2)}</span></del></p>
         <p>Price: Ksh.${product.price.toFixed(2)}</p>
         <button class="add-to-cart" data-id="${product.id}">Add to cart</button>
         <button class="delete-product" data-id="${product.id}">Delete</button>
@@ -64,8 +65,8 @@ function displayProducts() {
     deleteProductBtn.addEventListener('click', () => {
     const id = parseInt(deleteProductBtn.dataset.id);
     deleteProduct(id);
+ });
 });
-  });
 }
 function addToCart(id) {
     const productToAdd = products.find(product => product.id === id);
@@ -92,22 +93,20 @@ function addToCart(id) {
         }
         updateCart();
         }
-
-
-const buyBtn = document.querySelector('#buy');
-    buyBtn.addEventListener('click', (event) => {
-    event.preventDefault();
-    const message = document.createElement('div');
-    message.textContent = "Thank you for shopping with us. You were served by SAMUEL.";
-    document.body.appendChild(message);
-    setTimeout(() => {
-    document.body.removeChild(message);
-}, 3000);
-    // Reload page
-    setTimeout(() => {
-    location.reload();
-}, 3000);
-});
+        const buyBtn = document.querySelector('#buy');
+        buyBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        const message = document.createElement('div');
+        message.textContent = "Thank you for shopping with us. You were served by SAMUEL.";
+        document.body.appendChild(message);
+        setTimeout(() => {
+        document.body.removeChild(message);
+    }, 3000);
+        // Reload page
+        setTimeout(() => {
+        location.reload();
+    }, 3000);
+    });
 
 function deleteProduct(id) {
     // Send a DELETE request to the server to remove the product
@@ -208,12 +207,14 @@ postProductForm.addEventListener('submit', event => {
     const name = document.querySelector('#name').value;
     const description = document.querySelector('#description').value;
     const quantity = parseInt(document.querySelector('#quantity').value);
+    const previousPrice = parseFloat(document.querySelector('#previous-price').value);
     const price = parseFloat(document.querySelector('#price').value);
 
     const newProduct = {
     name: name,
     description: description,
     quantity: quantity,
+    previousPrice: previousPrice,
     price: price
 };
 
@@ -261,5 +262,6 @@ clientInfoForm.addEventListener('submit', (event) => {
 updateCartBtn.addEventListener('click', () => {
 updateCart();
 });
+
 
 

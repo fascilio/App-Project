@@ -1,53 +1,84 @@
 {
   "items": [
     {
-      "id": 1,
-      "name": "A table",
-      "description": "A nice table",
-      "price": 8000,
-      "quantity": 8
-    },
-    {
-      "name": "Television",
-      "description": "A best for home use",
-      "price": 20000,
-      "quantity": 12,
-      "id": 2
-    },
-    {
       "name": "Hisense 92L",
       "description": "Single door direct cooling fridge",
+      "previousPrice": 23000,
       "price": 21300,
       "quantity": 5,
-      "id": 3
-    },
-    {
-      "name": "Fresh Fri",
-      "description": "Tripple refined 3L",
-      "price": 1027,
-      "quantity": 20,
-      "id": 4
+      "id": 1
     },
     {
       "name": "Skyworth 43\"",
       "description": "Full HD Frameless",
+      "previousPrice": 27500,
       "price": 26699,
       "quantity": 7,
-      "id": 5
+      "id": 2
     },
     {
       "name": "HP Laptop",
       "description": "G 840 500USSD",
+      "previousPrice": 59000,
       "price": 57000,
       "quantity": 3,
+      "id": 3
+    },
+    {
+      "name": "Lenovo 14\"",
+      "description": "1TB HDD 4GB RAM",
+      "quantity": 4,
+      "previousPrice": 28500,
+      "price": 27999,
+      "id": 4
+    },
+    {
+      "name": "Generic USB 3.0",
+      "description": "Type c HDMI+PD+TF+SD",
+      "quantity": 13,
+      "previousPrice": 3310,
+      "price": 3280,
+      "id": 5
+    },
+    {
+      "name": "Transcend 2 TB",
+      "description": "External Memory Hard Disk StoreJet 25M3",
+      "quantity": 9,
+      "previousPrice": 9550,
+      "price": 9499,
       "id": 6
     },
     {
-      "name": "A seat",
-      "description": "Black recliner 7 seater",
-      "price": 65000,
-      "quantity": 5,
+      "name": "Canon PIXMA",
+      "description": "G2411-(print,copy,scan)-Rim",
+      "quantity": 2,
+      "previousPrice": 26799,
+      "price": 25999,
       "id": 7
+    },
+    {
+      "name": "HDMI to HDMI Cable",
+      "description": "Generic black 5M",
+      "quantity": 17,
+      "previousPrice": 600,
+      "price": 550,
+      "id": 8
+    },
+    {
+      "name": "SSD portable hard disk",
+      "description": "HD External USB3.0",
+      "quantity": 23,
+      "previousPrice": 6200,
+      "price": 5950,
+      "id": 9
+    },
+    {
+      "name": "Laptop Hard Disk",
+      "description": "External High-Speed USB 3.1",
+      "quantity": 17,
+      "previousPrice": 5000,
+      "price": 4730,
+      "id": 10
     }
   ]
 }

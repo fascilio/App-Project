@@ -65,17 +65,22 @@ h1{
     0 0 100px Green, 0 0 200px Green;
 }
 #product-list{
-    display: flex;
+   /* display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-between;*/
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+#product-list li{
+    border: 2px solid black;
+    box-shadow: 0 2px 2px pink;
+    padding: 20px;
 }
 
-#product-list > div {
-    flex-basis: calc(16.666% - 10px);
-    margin-bottom: 20px;
-}
-
-  
 /* position client info and post products to top right */
 #client-info-form{
     display: flex;
@@ -85,17 +90,3 @@ h1{
   display: flex;
 }
 
-/* move h1 with the form to the right */
-h1 {
-  transition: all 0.5s ease-in-out;
-}
-
-#client-info-form form > h1,
-#post-product-form form > h1 {
-  margin-left: 50px;
-}
-
-#client-info-form form:hover > h1,
-#post-product-form form:hover > h1 {
-  margin-left: 250px;
-}
