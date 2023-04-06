@@ -32,7 +32,7 @@ webpage, it allows a user to add them to a cart, delete from the cart and checko
  The form data is sent as a POST request to `http://localhost:3000/items`. when the request is received the `products` arrayis updated with the new product and displayed on the bage by `displayProducts()` function.
 
  ## Checking out
- When the "buy" button is clicked, a message is displayed thanking the user for shopping. After three seconds, the page reloads.
+ When the "buy" button is clicked, a receipt is generated indicating all products that has been bought including the quantity and price also a message would be displayed thanking the user for shopping if the code commented out in javascript file would be uncommented. After three seconds, the page reloads.
 
  ## Conclusion
  This program provides a simple implementation of a shopping cart that can be used as a starting point for building a complex e-commerce applications.

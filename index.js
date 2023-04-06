@@ -31,8 +31,6 @@ function displayProducts() {
         <button class="delete-product" data-id="${product.id}">Delete</button>
       `;
       productList.appendChild(item);
-  
-      
     // Add event listener to "Add to cart" button
     const addToCartBtn = item.querySelector('.add-to-cart');
     addToCartBtn.addEventListener('click', () => {
@@ -93,21 +91,58 @@ function addToCart(id) {
         }
         updateCart();
         }
-        const buyBtn = document.querySelector('#buy');
-        buyBtn.addEventListener('click', (event) => {
-        event.preventDefault();
-        const message = document.createElement('div');
-        message.textContent = "Purchase Done! Thank you for shopping with us.";
-        message.style.color =  "green";
-        document.body.appendChild(message);
-        setTimeout(() => {
-        document.body.removeChild(message);
-    }, 3000);
-        // Reload page
-        setTimeout(() => {
-        location.reload();
-    }, 3000);
-    });
+        
+        function generateReceipt() {
+          const shopName = "SHOPMART";
+          const receipt = document.createElement("div");
+          receipt.style.width = "250px";
+          receipt.innerHTML = `<h2>${shopName}</h2>`;
+          let total = 0;
+        
+          cart.forEach((item, index) => {
+            const itemPrice = item.price * item.quantity;
+            total += itemPrice;
+            receipt.innerHTML += `
+              <div class="item">
+                <p>${item.name}</p>
+                <p class="price"> ${item.quantity} -> Ksh.${itemPrice.toFixed(2)}</p>
+                <p>${item.description}</p>
+              </div>
+              ${index !== cart.length - 1 ? '<hr class="separator">' : ''}
+            `;
+          });
+        
+          receipt.innerHTML += `<p class="total">Total: <strong>Ksh.${total.toFixed(2)}</strong></p>`;
+          receipt.classList.add("receipt");
+          document.body.appendChild(receipt);
+        }
+//         const buyButton = document.querySelector('#buy');
+// buyButton.addEventListener('click', generateReceipt);
+
+const buyButton = document.querySelector('#buy');
+buyButton.addEventListener('click', () => {
+  
+  generateReceipt();
+  setTimeout(() => {
+   location.reload();
+  }, 3000); 
+});
+
+    //     const buyBtn = document.querySelector('#buy');
+    //     buyBtn.addEventListener('click', (event) => {
+    //     event.preventDefault();
+    //     const message = document.createElement('div');
+    //     message.textContent = "Purchase Done! Thank you for shopping with us.";
+    //     message.style.color =  "green";
+    //     document.body.appendChild(message);
+    //     setTimeout(() => {
+    //     document.body.removeChild(message);
+    // }, 3000);
+    //     // Reload page
+    //     setTimeout(() => {
+    //     location.reload();
+    // }, 3000);
+    // });
 
 function deleteProduct(id) {
     // Send a DELETE request to the server to remove the product
