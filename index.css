@@ -111,4 +111,8 @@ h1{
 #post-product-form {
   display: flex;
 }
+input[type="text"], input[type="number"], select {
+    background-color: pink;
+  }
+  
 
